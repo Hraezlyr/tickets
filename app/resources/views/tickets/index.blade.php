@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="telefono" class="form-label">Telefono del Cliente</label>
-                            <input type="text" class="form-control" id="telefono" name="telefono" maxlength="11" minlength="8" required>
+                            <input type="text" class="form-control" id="telefono" name="telefono" maxlength="11" minlength="8" onkeypress="return solonumeros(event)" required>
                         </div>
                         <div class="col-6">
                             <label for="nombre_gestion" class="form-label">Gestión Real Realizada</label>
@@ -88,4 +88,22 @@
     </div>
 </form>
 <script src="{{asset('js/atender.js')}}"></script>
+<script>
+    function solonumeros(e) {
+        var key = e.keyCode || e.which;
+        var teclado = String.fromCharCode(key);
+        var numeros = "1234567890";
+        var especiales = "8-37-38-46";
+        var teclado_especial = false;
+        for (let i in especiales ) {
+            if (key==especiales[i]) {
+                teclado_especial=true;
+            }
+
+        }
+        if (numeros.indexOf(teclado)==-1 && !teclado_especial) {
+            return false;
+        }
+    }
+</script>
 @endsection
